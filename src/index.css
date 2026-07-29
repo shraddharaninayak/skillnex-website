@@ -58,3 +58,24 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ===========================
+   Reviews Marquee
+=========================== */
+
+@keyframes reviewScroll {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-review-scroll {
+  display: flex;
+  width: max-content;
+  animation: reviewScroll 20s linear infinite;
+  will-change: transform;
+}

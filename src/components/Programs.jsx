@@ -55,11 +55,11 @@ export default function Programs() {
               Chapter 01 · Learn by doing
             </div>
            <div>
-  <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">
-    Build Skills Through
-    <br />
-    Execution.
-  </h2>
+<h2 className="text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] font-extrabold tracking-tight text-ink">
+  Build Skills Through
+  <br />
+  Execution.
+</h2>
 
   <div className="mt-8 flex items-center gap-3">
 <span className="h-1.5 w-24 rounded-full bg-amber"></span>
@@ -81,23 +81,23 @@ export default function Programs() {
                 key={program.title}
                 href="#solutions"
                 className="
-group
-flex
-flex-col
-p-9
-rounded-[28px]
-border
-border-cyan-100
-bg-gradient-to-br
-from-white
-via-white
-to-cyan-50
-shadow-sm
-transition-all
-duration-500
-hover:-translate-y-2
-hover:shadow-xl
-hover:shadow-cyan-100/60 "
+                    group
+                    flex
+                    flex-col
+                    p-9
+                    rounded-[28px]
+                    border
+                  border-cyan-100
+                    bg-gradient-to-br
+                  from-white
+                 via-white
+                 to-cyan-50
+                  shadow-sm
+                  transition-all
+                  duration-500
+                  hover:-translate-y-2
+                  hover:shadow-xl
+                hover:shadow-cyan-100/60 "
               >
                 <div className="flex items-start justify-between mb-6">
                   <span className="text-[11px] uppercase tracking-[0.3em] font-semibold text-orange-500">

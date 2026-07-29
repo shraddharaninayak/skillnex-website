@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 const REVIEW_SETS = {
   students: {
@@ -86,10 +86,10 @@ export default function Reviews() {
           <div className="max-w-xl">
             <div className="eyebrow mb-4">
               <span className="w-4 h-[2px] bg-cyan-600" />
-              Reviews
+              Trusted by All
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              What students, colleges, and founders say.
+              Real Stories, Real Outcomes.
             </h2>
           </div>
         </div>
@@ -110,27 +110,63 @@ export default function Reviews() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
-          {current.reviews.map((review) => (
-            <figure key={review.name} className="card p-7 flex flex-col">
-              <div className="flex items-center gap-1 mb-5" aria-label={`${review.rating} out of 5 stars`}>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-4 h-4 ${i < review.rating ? 'fill-amber text-amber' : 'fill-line text-line'}`}
-                  />
-                ))}
-              </div>
-              <blockquote className="text-sm text-ink leading-relaxed flex-1 mb-6">
-                "{review.quote}"
-              </blockquote>
-              <figcaption className="pt-5 border-t border-line">
-                <p className="font-display font-bold text-sm text-ink">{review.name}</p>
-                <p className="text-xs text-ink-secondary mt-1">{review.role}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <div className="relative overflow-hidden">
+  {/* Left Fade */}
+  <div className="absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-surface-subtle to-transparent pointer-events-none" />
+
+  {/* Right Fade */}
+  <div className="absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-surface-subtle to-transparent pointer-events-none" />
+
+  <div className="group overflow-hidden">
+    <div className="flex w-max gap-6 animate-review-scroll group-hover:[animation-play-state:paused]">
+
+      {[...current.reviews, ...current.reviews].map((review, index) => (
+        <figure
+          key={`${review.name}-${index}`}
+          className="card w-[360px] shrink-0 p-7 transition-all duration-300 hover:-translate-y-2 hover:border-cyan-500 hover:shadow-xl"
+        >
+          {/* Quote */}
+          <Quote
+            className="w-8 h-8 text-cyan-500 mb-4 opacity-90"
+            strokeWidth={2}
+          />
+
+          {/* Stars */}
+          <div
+            className="flex items-center gap-1 mb-5"
+            aria-label={`${review.rating} out of 5 stars`}
+          >
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                className={`w-4 h-4 ${
+                  i < review.rating
+                    ? "fill-amber text-amber"
+                    : "fill-line text-line"
+                }`}
+              />
+            ))}
+          </div>
+
+          <blockquote className="text-sm leading-7 text-ink mb-6 flex-1">
+            "{review.quote}"
+          </blockquote>
+
+          <figcaption className="border-t border-line pt-5">
+            <p className="font-display font-bold text-ink">
+              {review.name}
+            </p>
+
+            <p className="text-sm text-ink-secondary mt-1">
+              {review.role}
+            </p>
+          </figcaption>
+        </figure>
+      ))}
+
+    </div>
+  </div>
+</div>
       </div>
     </section>
   );

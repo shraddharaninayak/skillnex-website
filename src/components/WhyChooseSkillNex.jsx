@@ -75,11 +75,11 @@ export default function WhyChooseSkillNex() {
     Chapter 02 · The Architecture
   </div>
 
-  <h2 className="text-5xl lg:text-6xl font-black leading-tight">
-    Why Students
-    <br />
-    Choose SkillNex
-  </h2>
+  <h2 className="text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] font-extrabold tracking-tight text-ink">
+  Why Students
+  <br />
+  Choose SkillNex.
+</h2>
 
 
 <div className="mt-6 flex justify-end">
