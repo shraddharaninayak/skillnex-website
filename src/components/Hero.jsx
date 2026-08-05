@@ -3,9 +3,9 @@ import { ArrowRight, Play } from "lucide-react";
 export default function Hero() {
   return (
     <section
-      id="top"
-      className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden"
-    >
+  id="top"
+  className="relative bg-white pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden"
+>
       <div className="container-page">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           <div className="lg:col-span-6">
@@ -38,9 +38,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 text-lg text-ink-secondary leading-relaxed max-w-lg">
-              Skillnex pairs practitioner-led training with real hiring
-              pipelines so students, colleges, and companies build capability
-              that shows up on the job — not just on a resume.
+             Skillnex starts with skill-focused career counselling, helping you choose the right path early so you don't waste time or stay confused. Then you move into real execution through projects and mentorship, building practical skills that actually move your career forward.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
@@ -96,7 +94,7 @@ export default function Hero() {
               </div>
 
               <div
-                className="absolute -right-4 -top-4 w-24 h-24 bg-cyan flex items-center justify-center text-white hidden sm:flex"
+                className="absolute -right-4 -top-4 w-24 h-24 bg-cyan items-center justify-center text-white hidden sm:flex"
                 style={{
                   clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0 100%)",
                   borderRadius: "1rem",

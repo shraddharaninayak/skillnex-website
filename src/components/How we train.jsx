@@ -37,13 +37,13 @@ const PILLARS = [
 
 export default function WhatWeDo() {
   return (
-    <section id="what-we-do" className="section-pad bg-white">
+    <section id="what-we-do" className="section-pad bg-surface-subtle">
       <div className="container-page">
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <div className="eyebrow mb-4">
               <span className="w-4 h-[2px] bg-cyan-600" />
-              CHAPTER 03 • How we Train
+              • How we Train
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-5">
               Learn the Skills Companies Actually Hire For.

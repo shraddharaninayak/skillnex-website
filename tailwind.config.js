@@ -27,11 +27,11 @@ export default {
         },
         line: '#E5E7EB',
       },
-      fontFamily: {
-        display: ['Manrope', 'sans-serif'],
-        sans: ['Inter', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'monospace'],
-      },
+     fontFamily: {
+  display: ['"Bricolage Grotesque"', 'sans-serif'],
+  sans: ['Manrope', 'sans-serif'],
+  mono: ['"JetBrains Mono"', 'monospace'],
+},
       maxWidth: {
         content: '1280px',
       },

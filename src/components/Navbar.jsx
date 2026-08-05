@@ -44,10 +44,18 @@ export default function Navbar() {
         scrolled ? 'bg-white/95 backdrop-blur-sm border-b border-line' : 'bg-white border-b border-transparent'
       }`}
     >
-      <nav className="container-page flex items-center justify-between h-20">
-        <a href="#top" className="flex items-center shrink-0" aria-label="Skillnex home">
-          <img src={logo} alt="Skillnex — Future Skills Start Here" className="h-24 w-auto object-contain" />
-        </a>
+      <nav className="container-page flex items-center justify-between h-22 lg:h-24">
+       <a
+  href="#top"
+  className="flex items-center shrink-0 mr-2 md:mr-4"
+  aria-label="Skillnex home"
+>
+  <img
+    src={logo}
+    alt="Skillnex — Future Skills Start Here"
+    className="h-20 w-auto object-contain"
+  />
+</a>
 
         <ul className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) => (

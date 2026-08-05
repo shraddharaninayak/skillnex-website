@@ -29,13 +29,13 @@ const PROJECTS = [
 
 export default function Portfolio() {
   return (
-    <section className="section-pad bg-white">
+    <section className="section-pad bg-surface-subtle">
       <div className="container-page">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div className="max-w-xl">
             <div className="eyebrow mb-4">
               <span className="w-4 h-[2px] bg-cyan-600" />
-              Student portfolio
+             · Student portfolio
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
               Real projects, shipped by real students.

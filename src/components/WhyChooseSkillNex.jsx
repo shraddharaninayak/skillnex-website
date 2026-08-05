@@ -1,43 +1,35 @@
 import { motion } from "framer-motion";
-import {
-  GraduationCap,
-  FolderKanban,
-  BriefcaseBusiness,
-  Handshake,
-  Mic2,
-  Rocket,
-} from "lucide-react";
 
 const FEATURES = [
   {
-    icon: GraduationCap,
-    title: "Industry Experts",
-    description: "Learn directly from professionals.",
+    title: "Learn from Industry Experts",
+    description:
+      "Every concept is applied through assignments and real work instead of only classroom learning.",
   },
   {
-    icon: FolderKanban,
-    title: "Portfolio",
-    description: "Build projects employers love.",
+    title: "Build a Real Portfolio",
+    description:
+      "Learn directly from professionals who work in the industry and understand current trends.",
   },
   {
-    icon: BriefcaseBusiness,
-    title: "Live Projects",
-    description: "Real-world client experience.",
+    title: "Work on Live Projects",
+    description:
+      "Build projects that demonstrate your skills and help you stand out during interviews.",
   },
   {
-    icon: Rocket,
-    title: "Placement Support",
-    description: "Career guidance & placement support.",
+    title: "Internship Opportunities",
+    description:
+      "Gain practical experience through structured internships and real client work.",
   },
   {
-    icon: Mic2,
     title: "Mock Interviews",
-    description: "Practice before the real interview.",
+    description:
+      "Resume building, LinkedIn optimization, mock interviews and career guidance included.",
   },
   {
-    icon: Handshake,
-    title: "Internships",
-    description: "Gain valuable industry exposure.",
+    title: "Placement Support",
+    description:
+      "Dedicated placement assistance to help you confidently begin your professional career.",
   },
 ];
 
@@ -57,141 +49,90 @@ const fadeUp = {
 
 export default function WhyChooseSkillNex() {
   return (
-    <section
-    id="why-skillnex"
-    className="relative overflow-hidden bg-white py-24"
-  >
-   <div className="container-page">
-  <div className="grid lg:grid-cols-2 gap-20 items-center">
+   <section
+  id="why-skillnex"
+  className="relative bg-white py-24 overflow-hidden"
+>
+  <div className="container-page">
 
-    <motion.div
+    <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-16">
+
+      {/* LEFT */}
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="lg:sticky lg:top-28 self-start"
+      >
+
+        <div className="eyebrow mb-6">
+          <span className="w-4 h-[2px] bg-cyan-600"></span>
+         · Why SkillNex
+        </div>
+
+        <h2 className="text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] font-extrabold text-ink">
+          Why Students
+          <br />
+          Choose SkillNex for Career Growth?
+          <span className="block text-cyan-600">
+            We Teach the Job.
+          </span>
+        </h2>
+
+        <p className="mt-8 max-w-lg text-lg leading-8 text-slate-600">
+          We bridge the gap between classroom learning and industry
+          expectations through live projects, mentorship, internships and
+          career support.
+        </p>
+
+        <div className="mt-12 border-t border-slate-200 pt-8">
+  <blockquote className="max-w-md text-2xl font-semibold leading-relaxed text-ink">
+    "Learn with confidence. Build with purpose. Get career ready."
+  </blockquote>
+</div>
+
+      </motion.div>
+
+      {/* RIGHT */}
+
+        <div className="grid gap-px bg-slate-200 sm:grid-cols-2 rounded-[32px] overflow-hidden">
+        {FEATURES.map((item, index) => (
+
+          <motion.div
+  key={item.title}
   variants={fadeUp}
   initial="hidden"
   whileInView="show"
   viewport={{ once: true }}
+  transition={{
+    delay: index * 0.08,
+  }}
+  className="group relative overflow-hidden border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-slate-50 hover:shadow-xl"
 >
-  <div className="eyebrow mb-5">
-    <span className="w-4 h-[2px] bg-cyan-600" />
-    Chapter 02 · The Architecture
-  </div>
+  {/* Orange Accent Bar */}
+  <div className="absolute left-0 top-0 h-full w-1 bg-[#F59E0B] origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100"></div>
 
-  <h2 className="text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] font-extrabold tracking-tight text-ink">
-  Why Students
-  <br />
-  Choose SkillNex.
-</h2>
+  <span className="text-sm font-semibold tracking-widest text-[#F59E0B]">
+    {String(index + 1).padStart(2, "0")}
+  </span>
 
+  <h3 className="mt-6 text-xl font-bold text-ink transition-colors group-hover:text-cyan-600">
+    {item.title}
+  </h3>
 
-<div className="mt-6 flex justify-end">
-  <div className="flex items-center">
-    <div className="flex items-center gap-2">
-      <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
-      <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]/70" />
-    </div>
-
-  <div className="ml-3 h-[2px] w-48 rounded-full bg-gradient-to-r from-[#F59E0B] to-transparent" />
-</div>
-</div>
-
-  <p className="mt-8 text-lg leading-8 text-slate-600">
-    We don't just teach.
-    We prepare you for your career with mentors,
-    projects, internships and placement support.
+  <p className="mt-4 leading-7 text-slate-600">
+    {item.description}
   </p>
-
-  <button className="mt-10 rounded-full bg-cyan-600 px-8 py-4 text-white font-semibold hover:bg-cyan-700 transition">
-    Explore Programs
-  </button>
 </motion.div>
+        ))}
 
-<div className="relative flex items-center justify-center h-[700px]">
+      </div>
 
-  {/* Orbit Ring */}
-  <div className="absolute h-[500px] w-[500px] rounded-full border border-dashed border-cyan-200"></div>
-
-  {/* Center Circle */}
-  <motion.div
-    animate={{ scale: [1, 1.05, 1] }}
-    transition={{
-      duration: 4,
-      repeat: Infinity,
-    }}
-    className="absolute z-20 flex h-52 w-52 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-700 shadow-2xl"
-  >
-    <div className="text-center">
-      <h3 className="text-4xl font-bold text-white">
-        SkillNex
-      </h3>
-
-      <p className="mt-2 text-cyan-100">
-       Core
-      </p>
-
-      
     </div>
-  </motion.div>
 
-  {FEATURES.map((item, index) => {
-  const Icon = item.icon;
-
-  const angle =
-    (index / FEATURES.length) * Math.PI * 2 - Math.PI / 2;
-
-  const radius = 250;
-
-  const x = Math.cos(angle) * radius;
-
-  const y = Math.sin(angle) * radius;
-
-  return (
-    <motion.div
-      key={item.title}
-      style={{
-        left: `calc(50% + ${x}px)`,
-        top: `calc(50% + ${y}px)`,
-      }}
-      className="absolute -translate-x-1/2 -translate-y-1/2 z-30 group"
-      animate={{
-        y: [0, -5, 0],
-      }}
-      transition={{
-        duration: 3,
-        delay: index * 0.1,
-        repeat: Infinity,
-      }}
-      whileHover={{
-        scale: 1.12,
-      }}
-    >
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white border-2 border-cyan-200 shadow-xl">
-        <Icon className="h-8 w-8 text-cyan-600" />
-      </div>
-
-      <div className="absolute left-1/2 top-20 hidden -translate-x-1/2 whitespace-nowrap rounded-xl bg-slate-900 px-4 py-2 text-sm text-white group-hover:block">
-        {item.title}
-      </div>
-    </motion.div>
-  );
-})}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-      </div> {/* grid */}
-    </div> {/* container-page */}
-  </section>
+  </div>
+</section>
   );
 }

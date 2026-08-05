@@ -46,13 +46,13 @@ const PROGRAMS = [
 
 export default function Programs() {
   return (
-    <section id="programs" className="section-pad bg-white">
+    <section id="programs" className="section-pad bg-surface-subtle">
       <div className="container-page">
         <div className="mb-14">
           <div className="max-w-3xl">
             <div className="eyebrow mb-4">
               <span className="w-4 h-[2px] bg-cyan-600" />
-              Chapter 01 · Learn by doing
+               · Learn by doing
             </div>
            <div>
 <h2 className="text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] font-extrabold tracking-tight text-ink">

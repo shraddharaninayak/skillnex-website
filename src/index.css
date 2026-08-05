@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,34 +11,96 @@
     @apply bg-surface text-ink font-sans antialiased;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
-    @apply font-display text-ink;
+  h1 {
+    @apply font-display font-extrabold tracking-[-0.04em] leading-[0.94];
+  }
+
+  h2 {
+    @apply font-display font-bold tracking-[-0.03em] leading-tight;
+  }
+
+  h3 {
+    @apply font-display font-semibold tracking-[-0.02em];
+  }
+
+  p {
+    @apply font-sans leading-8;
   }
   ::selection {
     @apply bg-cyan-100 text-ink;
   }
   :focus-visible {
-    outline: 2px solid #06B6D4;
+    outline: 2px solid #06b6d4;
     outline-offset: 3px;
     border-radius: 4px;
   }
 }
 
 @layer components {
+  .hero-title {
+    @apply font-display text-ink;
+    font-size: clamp(3.25rem, 8vw, 6.8rem);
+    font-weight: 800;
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+  }
+
+  .section-title {
+    @apply font-display text-ink;
+    font-size: clamp(2.5rem, 4vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  .section-subtitle {
+    @apply font-sans;
+    font-size: clamp(1.125rem, 1.5vw, 1.3rem);
+    line-height: 1.75;
+    color: #6b7280;
+  }
+
+  .body-copy {
+    @apply font-sans;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
   .container-page {
     @apply max-w-content mx-auto px-6 md:px-10;
   }
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] uppercase text-cyan-600;
+    @apply inline-flex items-center gap-3 uppercase text-cyan-600;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-ink text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-colors duration-200 hover:bg-cyan-600 focus-visible:outline-offset-4;
+    @apply inline-flex items-center justify-center gap-2
+         bg-ink text-white
+         text-[15px] font-semibold
+         px-7 py-4
+         rounded-full
+         transition-colors duration-200
+         hover:bg-cyan-600;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 bg-white text-ink text-sm font-semibold px-6 py-3.5 rounded-full border border-line transition-colors duration-200 hover:border-ink;
+    @apply inline-flex items-center justify-center gap-2
+         bg-ink text-white
+         text-[15px] font-semibold
+         px-7 py-4
+         rounded-full
+         transition-colors duration-200
+         hover:bg-cyan-600;
   }
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 bg-amber text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-colors duration-200 hover:bg-amber-600;
+    @apply inline-flex items-center justify-center gap-2
+         bg-ink text-white
+         text-[15px] font-semibold
+         px-7 py-4
+         rounded-full
+         transition-colors duration-200
+         hover:bg-cyan-600;
   }
   .card {
     @apply bg-white border border-line rounded-2xl shadow-card transition-shadow duration-200;
@@ -46,7 +109,7 @@
     @apply hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200;
   }
   .section-pad {
-    @apply py-20 md:py-28;
+    @apply py-24 md:py-32;
   }
 }
 

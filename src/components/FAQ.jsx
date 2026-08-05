@@ -38,13 +38,13 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="section-pad bg-white">
+    <section id="faq" className="section-pad bg-surface-subtle">
       <div className="container-page">
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <div className="eyebrow mb-4">
               <span className="w-4 h-[2px] bg-cyan-600" />
-              FAQ
+             · FAQ
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-5">
               Questions, answered plainly.

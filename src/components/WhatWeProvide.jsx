@@ -35,12 +35,12 @@ const PROVISIONS = [
 
 export default function WhatWeProvide() {
   return (
-    <section className="section-pad bg-surface-subtle">
+    <section className="section-pad bg-white">
       <div className="container-page">
         <div className="max-w-xl mb-14">
           <div className="eyebrow mb-4">
             <span className="w-4 h-[2px] bg-cyan-600" />
-            What we provide
+           · What we provide
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
             Everything training needs to actually convert to a job.

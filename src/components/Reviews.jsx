@@ -80,13 +80,13 @@ export default function Reviews() {
   const current = REVIEW_SETS[activeTab];
 
   return (
-    <section id="reviews" className="section-pad bg-surface-subtle">
+    <section id="reviews" className="section-pad bg-white">
       <div className="container-page">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div className="max-w-xl">
             <div className="eyebrow mb-4">
               <span className="w-4 h-[2px] bg-cyan-600" />
-              Trusted by All
+             · Trusted by All
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
               Real Stories, Real Outcomes.
