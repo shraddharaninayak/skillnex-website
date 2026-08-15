@@ -47,10 +47,16 @@
 
   .section-title {
     @apply font-display text-ink;
-    font-size: clamp(2.5rem, 4vw, 3.75rem);
-    font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 3.2rem;
+    }
   }
 
   .section-subtitle {
@@ -109,7 +115,13 @@
     @apply hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200;
   }
   .section-pad {
-    @apply py-24 md:py-32;
+    @apply py-8 md:py-12;
+  }
+}
+@layer components {
+  section {
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 }
 

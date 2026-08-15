@@ -1,174 +1,125 @@
-import { Linkedin, Instagram } from 'lucide-react';
+import {
+  BookOpen,
+  Laptop,
+  Users,
+  BriefcaseBusiness,
+} from "lucide-react";
 import aboutImage from "../assets/about-skillnex.png";
 
-const highlights = [
+const FEATURES = [
   {
-    value: "100%",
+    icon: BookOpen,
     label: "Practical Learning",
   },
   {
-    value: "Live",
-    label: "Interactive Classes",
+    icon: Laptop,
+    label: "Live Classes",
   },
   {
-    value: "Career",
-    label: "Mentorship",
+    icon: Users,
+    label: "Industry Mentors",
+  },
+  {
+    icon: BriefcaseBusiness,
+    label: "Career Support",
   },
 ];
+
 export default function Founder() {
   return (
-    <section className="section-pad bg-white">
+    <section className="section-pad bg-[#EEF6F7]">
       <div className="container-page">
 
-  {/* Top Grid */}
-  <div className="grid lg:grid-cols-[220px_1fr] gap-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-    {/* Left Label */}
+          {/* LEFT: IMAGE */}
+          <div className="w-full">
+            <div className="overflow-hidden rounded-[1.75rem]">
+              <img
+                src={aboutImage}
+                alt="Student attending a SkillNex online live class"
+                className="w-full h-[520px] object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
 
-    
-      <div className="flex lg:flex-col gap-4">
+          {/* RIGHT: CONTENT */}
+          <div>
 
-        <div className="eyebrow">
-          <span className="w-4 h-[2px] bg-cyan-600" />
-         · About SkillNex
-        </div>
+            {/* EYEBROW */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-12 h-px bg-cyan-600" />
 
-      </div>
+              <span className="text-xs font-mono uppercase tracking-[0.28em] text-cyan-700">
+                About SkillNex
+              </span>
+            </div>
 
-    {/* Heading */}
- <div>
+            {/* MAIN HEADING */}
+            <h2 className="font-display text-4xl md:text-5xl lg:text-[42px] font-bold leading-[1.12] tracking-tight text-[#102A43] max-w-xl">
+              Building Skills.
+              <br />
+              Building Careers.
+            </h2>
 
-        <blockquote
-          className="
-          font-display
-          font-extrabold
-          text-3xl
-          md:text-5xl
-          leading-[1.05]
-          tracking-[-0.04em]
-          text-ink
-          max-w-4xl
-          "
-        >
-          “I interviewed hundreds of graduates with excellent marks and no
-          idea how work actually happens. SkillNex exists to fix that{" "} - 
-          <span className="text-cyan-500">
-           students here finish with proof of skills
-          </span>
-          , not a printout.”
-        </blockquote>
+            {/* FIRST PARAGRAPH */}
+            <p className="mt-7 text-lg leading-8 text-[#657A91] max-w-2xl">
+              SkillNex is a practical learning platform built to help students
+              develop real-world digital skills through hands-on training,
+              live projects, industry mentorship, portfolio building,
+              internships and career guidance.
+            </p>
 
-      </div>
+            {/* SECOND PARAGRAPH */}
+            <p className="mt-5 text-lg leading-8 text-[#657A91] max-w-2xl">
+              We believe learning should prepare students for real careers,
+              not just certifications. Every program is designed around
+              practical experience that builds confidence and makes learners
+              industry ready.
+            </p>
 
-    </div>
+           {/* FOUNDER */}
+<div className="mt-9 flex items-center gap-4">
 
-    {/* Bottom Grid */}
+  <span className="w-12 h-px bg-cyan-500" />
 
-    <div className="mt-20 grid lg:grid-cols-[0.85fr_1.15fr] gap-16 items-start">
+  <div>
+    <p className="font-display font-bold text-lg text-[#102A43]">
+      Anchal Joshi
+    </p>
 
-        {/* Image */}
+    <p className="text-xs uppercase tracking-[0.2em] text-[#657A91]">
+      Founder • Nashik
+    </p>
+  </div>
 
-        <div className="overflow-hidden rounded-2xl border border-line shadow-sm">
-        <img
-          src={aboutImage}
-          alt="Students attending an online SkillNex live class"
-          className="w-full h-[420px] object-cover"
-          loading="lazy"
-        />
-      </div>
+</div>
 
-        {/* Right Content */}
+            {/* FEATURE PILLS */}
+            <div className="mt-8 flex flex-wrap gap-3">
 
-      
-      <div className="flex flex-col justify-between h-full">
+              {FEATURES.map((feature) => {
+                const Icon = feature.icon;
 
-        <div>
+                return (
+                  <div
+                    key={feature.label}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm text-[#24577A] shadow-sm"
+                  >
+                    <Icon className="w-4 h-4" />
 
-          <h3 className="font-display text-3xl font-bold text-ink">
-            SkillNex
-          </h3>
-
-          <p className="mt-2 text-xs uppercase tracking-[0.25em] text-ink-secondary">
-            Future Skills Start Here
-          </p>
-
-          <p className="mt-8 text-lg leading-8 text-ink-secondary">
-            SkillNex is a practical learning platform built to help students
-            develop real-world digital skills through hands-on training,
-            live projects, industry mentorship, portfolio building,
-            internships and career guidance.
-          </p>
-
-          <p className="mt-6 text-lg leading-8 text-ink-secondary">
-            We believe learning should prepare students for real careers,
-            not just certifications. Every program is designed around
-            practical experience that builds confidence and makes learners
-            industry ready.
-          </p>
-
-        </div>
-
-          {/* Stats */}
-
-                <div className="mt-14 grid grid-cols-1 border-t border-line sm:grid-cols-3">
-
-          {highlights.map((item, index) => (
-
-            <div
-              key={item.label}
-              className={`py-7 ${
-                index > 0
-                  ? "border-t border-line sm:border-l sm:border-t-0 sm:pl-6"
-                  : ""
-              }`}
-            >
-
-              <p className="font-display text-3xl font-bold text-ink">
-                {item.value}
-              </p>
-
-              <p className="mt-2 text-sm text-ink-secondary">
-                {item.label}
-              </p>
+                    <span>{feature.label}</span>
+                  </div>
+                );
+              })}
 
             </div>
 
-          ))}
-
-        </div>
-
-
-          {/* Social icons */}
- <div className="mt-10 flex items-center gap-3">
-
-          <a
-            href="https://www.linkedin.com/company/skillnex-30/posts/?feedView=all"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="SkillNex on LinkedIn"
-            className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink-secondary hover:text-cyan-600 hover:border-cyan-600 transition-all duration-300"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-
-          <a
-            href="https://www.instagram.com/skillnex.30/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="SkillNex on Instagram"
-            className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink-secondary hover:text-cyan-600 hover:border-cyan-600 transition-all duration-300"
-          >
-            <Instagram className="w-5 h-5" />
-          </a>
-
+          </div>
         </div>
 
       </div>
-
-    </div>
-
-  </div>
-</section>
+    </section>
   );
 }
-

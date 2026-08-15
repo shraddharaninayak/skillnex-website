@@ -1,7 +1,7 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Programs from './components/Programs';
-import Solutions from './components/WhyChooseSkillNex';
+import WhyChooseSkillNex from './components/WhyChooseSkillNex';
 import WhatWeDo from './components/How we train';
 import Founder from './components/About Skillnex';
 import TrainingProcess from './components/TrainingProcess';
@@ -11,7 +11,6 @@ import Reviews from './components/Reviews';
 import FAQ from './components/FAQ';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
-import WhyChooseSkillNex from './components/WhyChooseSkillNex';
 
 export default function App() {
   return (
@@ -21,8 +20,8 @@ export default function App() {
         <Hero />
         <Programs />
         <WhyChooseSkillNex />
-        <WhatWeDo />
         <Founder />
+        <WhatWeDo />
         <TrainingProcess />
         <WhatWeProvide />
         <Portfolio />

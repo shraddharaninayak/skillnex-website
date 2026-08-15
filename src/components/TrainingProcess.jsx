@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const STEPS = [
   {
@@ -6,21 +7,21 @@ const STEPS = [
     title: "Skill Assessment",
     meta: "Week 0",
     description:
-      "We evaluate your current skills, goals, and target role to build a personalized learning path.",
+      "We evaluate your current skills, goals and target role to build a personalized learning path.",
   },
   {
     number: "02",
     title: "Practical Training",
     meta: "Weeks 1–8",
     description:
-      "Learn through live sessions, assignments, mentor support, and practical exercises instead of passive lectures.",
+      "Learn through live sessions, assignments, mentor support and practical exercises instead of passive lectures.",
   },
   {
     number: "03",
     title: "Live Projects",
     meta: "Weeks 6–14",
     description:
-      "Work on industry-style projects with deadlines, reviews, teamwork, and real workflows.",
+      "Work on industry-style projects with deadlines, reviews, teamwork and real workflows.",
   },
   {
     number: "04",
@@ -41,106 +42,188 @@ const STEPS = [
     title: "Placement Support",
     meta: "Until Placed",
     description:
-      "Receive resume reviews, mock interviews, hiring partner referrals, and career guidance until placement.",
+      "Receive resume reviews, mock interviews, hiring partner referrals and career guidance until placement.",
   },
 ];
 
 export default function TrainingProcess() {
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % STEPS.length);
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="process" className="section-pad bg-surface-subtle">
+    <section id="process" className="section-pad bg-white">
       <div className="container-page">
+        {/* ============================= */}
+        {/* MAIN HEADING */}
+        {/* ============================= */}
 
-  <div className="grid lg:grid-cols-[420px_minmax(0,1fr)] gap-24 xl:gap-32">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="eyebrow mb-5 justify-center">
+            <span className="w-4 h-[2px] bg-cyan-600" />• Skill Training Process
+          </div>
 
-    {/* Left Side */}
-    <div className="sticky top-28 self-start h-fit">
+          <h2 className="section-title">
+            A six-step path from
+            <br />
+            begi
+            <span className="relative inline-block isolate">
+              <span className="relative z-10">nner to hired.</span>
 
-      <div className="flex items-center gap-4 mb-5">
+              <span
+                className="
+        absolute
+        left-0
+        right-0
+        bottom-[0.02em]
+        h-[0.22em]
+        bg-[#F59E0B]
+        rounded-full
+        z-0
+        pointer-events-none
+      "
+              />
+            </span>
+          </h2>
 
-  <div className="eyebrow">
-    <span className="w-4 h-[2px] bg-cyan-600" />
-   · Skill Training Process
-  </div>
-
-</div>
-
-      <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-5 text-ink">
-  A six-step path from beginner to hired.
-</h2>
-
-      <p className="mt-8 max-w-sm text-[18px] leading-[1.7] text-ink-secondary">
-        Structured learning that transforms beginners into industry-ready professionals through practical experience.
-      </p>
-
-    </div>
-
-  <div className="relative pl-10 lg:pl-14">
-
-  {/* Vertical Line */}
-<div className="absolute left-[18px] top-5 bottom-5 w-px bg-zinc-200" />
-<div className="space-y-2">
-
-    {STEPS.map((step) => (
-
-     <motion.div
-  key={step.number}
-  initial={{ opacity: 0, x: 80 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  viewport={{ once: true, amount: 0.3 }}
-  transition={{
-    duration: 0.7,
-    ease: [0.22, 1, 0.36, 1],
-    delay: Number(step.number) * 0.08,
-  }}
-  className="group relative grid grid-cols-[46px_minmax(0,1fr)_90px] gap-6 border-b border-zinc-200 py-7 transition-all duration-300"
->
-
-        {/* Number */}
-
-      <div className="relative z-10 flex justify-center">
-
-  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-300 bg-white text-[12px] font-medium text-zinc-700 shadow-[0_0_0_6px_white] transition-all duration-300 group-hover:border-cyan-500 group-hover:bg-cyan-500 group-hover:text-white">
-
-    {step.number}
-  
-
-  </div>
-
-</div>
-
-        {/* Content */}
-
-        <div>
-
-<h3 className="text-[26px] lg:text-[28px] font-bold tracking-[-0.02em] leading-tight text-ink transition-colors duration-300 group-hover:text-cyan-600">            {step.title}
-          </h3>
-
-<p className="mt-3 max-w-[480px] text-[16px] leading-7 text-zinc-500">  {step.description}
-</p>
-
+          <p className="mt-6 max-w-xl mx-auto text-[18px] leading-[1.7] text-ink-secondary">
+            Structured learning that transforms beginners into industry-ready
+            professionals through practical experience.
+          </p>
         </div>
 
-        {/* Meta */}
+        {/* ============================= */}
+        {/* PROCESS */}
+        {/* ============================= */}
 
-        <div className="pt-2">
+        <div className="relative mt-16">
+          {/* Horizontal connecting line */}
 
-<span className="text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-500 whitespace-nowrap transition-colors duration-300 group-hover:text-cyan-600">            {step.meta}
+          <div className="absolute left-0 right-0 top-[18px] h-px bg-zinc-200" />
 
-          </span>
+          {/* Six steps */}
 
+          <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-6">
+            {STEPS.map((step, index) => (
+              <motion.div
+                key={step.number}
+                initial={{
+                  opacity: 0,
+                  x: 100,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.7,
+                  delay: index * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="group relative"
+              >
+                {/* ============================= */}
+                {/* NUMBER */}
+                {/* ============================= */}
+
+                <div className="relative z-10 flex">
+                  <motion.div
+                    animate={{
+                      backgroundColor:
+                        activeStep === index ? "#F59E0B" : "#FFFFFF",
+
+                      borderColor: activeStep === index ? "#F59E0B" : "#D4D4D8",
+
+                      color: activeStep === index ? "#FFFFFF" : "#3F3F46",
+
+                      boxShadow:
+                        activeStep === index
+                          ? "0 0 0 8px rgba(245,158,11,0.10), 0 0 28px rgba(245,158,11,0.20)"
+                          : "0 0 0 5px white",
+                    }}
+                    transition={{
+                      duration: 0.45,
+                    }}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border text-[12px] font-medium"
+                  >
+                    {step.number}
+                  </motion.div>
+                </div>
+
+                {/* ============================= */}
+                {/* STEP CONTENT */}
+                {/* ============================= */}
+
+                <div className="mt-7">
+                  {/* Title */}
+
+                  <motion.h3
+                    animate={{
+                      color: activeStep === index ? "#F59E0B" : "#111111",
+                    }}
+                    transition={{
+                      duration: 0.4,
+                    }}
+                    className="text-lg font-bold tracking-tight leading-tight"
+                  >
+                    {step.title}
+                  </motion.h3>
+
+                  {/* Week */}
+
+                  <motion.span
+                    animate={{
+                      color: activeStep === index ? "#F59E0B" : "#71717A",
+                    }}
+                    transition={{
+                      duration: 0.4,
+                    }}
+                    className="mt-4 block text-[10px] font-medium uppercase tracking-[0.28em]"
+                  >
+                    {step.meta}
+                  </motion.span>
+
+                  {/* ============================= */}
+                  {/* DESCRIPTION ON HOVER */}
+                  {/* ============================= */}
+
+                  <div className="overflow-hidden">
+                    <p
+                      className="
+                        max-h-0
+                        translate-y-2
+                        opacity-0
+                        text-sm
+                        leading-6
+                        text-zinc-500
+                        transition-all
+                        duration-500
+                        ease-out
+                        group-hover:mt-4
+                        group-hover:max-h-40
+                        group-hover:translate-y-0
+                        group-hover:opacity-100
+                      "
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-
-      </motion.div>
-
-    ))}
-
-  </div>
-
-</div>
-
-  </div>
-
-</div>
+      </div>
     </section>
   );
 }
