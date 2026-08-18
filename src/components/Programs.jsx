@@ -2,8 +2,6 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const API_URL = "/api";
-
 const FRONTEND_PROGRAMS = [
   {
     id: "social-media-management",
@@ -75,52 +73,6 @@ export default function Programs() {
   const [programs, setPrograms] = useState(FRONTEND_PROGRAMS);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  // Fetch programs from backend
-  useEffect(() => {
-    const fetchPrograms = async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await fetch(`${API_URL}/programs`);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch programs");
-        }
-
-        const data = await response.json();
-
-        const backendPrograms = data.programs || [];
-
-        setPrograms(
-          FRONTEND_PROGRAMS.map((frontendProgram) => {
-            const backendProgram = backendPrograms.find(
-              (item) =>
-                item.slug === frontendProgram.slug ||
-                item.title === frontendProgram.title,
-            );
-
-            return backendProgram
-              ? {
-                  ...frontendProgram,
-                  ...backendProgram,
-                }
-              : frontendProgram;
-          }),
-        );
-      } catch (error) {
-        console.error("Error loading programs:", error);
-        setError("Unable to load programs.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPrograms();
-  }, []);
 
   // Next program
   const nextProgram = () => {
@@ -190,40 +142,10 @@ export default function Programs() {
         </div>
 
         {/* =========================
-            LOADING STATE
-        ========================== */}
-
-        {loading && (
-          <div className="flex items-center justify-center py-20">
-            <div
-              className="
-                w-6
-                h-6
-                rounded-full
-                border-2
-                border-cyan-200
-                border-t-cyan-600
-                animate-spin
-              "
-            />
-          </div>
-        )}
-
-        {/* =========================
-            ERROR STATE
-        ========================== */}
-
-        {error && !loading && (
-          <div className="flex items-center justify-center py-20">
-            <p className="text-sm text-red-500">{error}</p>
-          </div>
-        )}
-
-        {/* =========================
             PROGRAM CAROUSEL
         ========================== */}
 
-        {!loading && !error && programs.length > 0 && (
+        {programs.length > 0 && (
           <div className="relative mt-16">
             {/* LEFT ARROW */}
 

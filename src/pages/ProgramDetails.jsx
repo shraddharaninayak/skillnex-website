@@ -26,7 +26,7 @@ const API_BASE_URL = "/api";
 async function fetchProgram(slug) {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/programs/${encodeURIComponent(slug)}`
+      `${API_BASE_URL}/programs/${encodeURIComponent(slug)}`,
     );
 
     if (!response.ok) {
@@ -154,13 +154,7 @@ function getPointDescription(point) {
     return point;
   }
 
-  return (
-    point.description ||
-    point.text ||
-    point.detail ||
-    point.content ||
-    ""
-  );
+  return point.description || point.text || point.detail || point.content || "";
 }
 
 function getStructureTitle(item) {
@@ -178,13 +172,7 @@ function getStructureDescription(item) {
     return "";
   }
 
-  return (
-    item.description ||
-    item.text ||
-    item.detail ||
-    item.content ||
-    ""
-  );
+  return item.description || item.text || item.detail || item.content || "";
 }
 
 function getStepTitle(step) {
@@ -202,23 +190,14 @@ function getStepDescription(step) {
     return "";
   }
 
-  return (
-    step.description ||
-    step.text ||
-    step.detail ||
-    step.content ||
-    ""
-  );
+  return step.description || step.text || step.detail || step.content || "";
 }
 
 function getPositioningLine(program) {
   if (!program) return "";
 
   return (
-    program.positioningLine ||
-    program.positioning ||
-    program.tagline ||
-    ""
+    program.positioningLine || program.positioning || program.tagline || ""
   );
 }
 
@@ -262,19 +241,9 @@ const stagger = {
    SECTION HEADING
 ========================================================= */
 
-function SectionHeading({
-  eyebrow,
-  title,
-  align = "left",
-}) {
+function SectionHeading({ eyebrow, title, align = "left" }) {
   return (
-    <div
-      className={
-        align === "center"
-          ? "text-center mb-14"
-          : "mb-12"
-      }
-    >
+    <div className={align === "center" ? "text-center mb-14" : "mb-12"}>
       <div
         className={`flex items-center gap-2 mb-4 ${
           align === "center" ? "justify-center" : ""
@@ -282,14 +251,10 @@ function SectionHeading({
       >
         <span className="w-4 h-[2px] bg-cyan-600" />
 
-        <span className="eyebrow">
-          {eyebrow}
-        </span>
+        <span className="eyebrow">{eyebrow}</span>
       </div>
 
-      <h2 className="section-title">
-        {title}
-      </h2>
+      <h2 className="section-title">{title}</h2>
     </div>
   );
 }
@@ -298,11 +263,7 @@ function SectionHeading({
    POINT CARD
 ========================================================= */
 
-function PointCard({
-  title,
-  description,
-  index,
-}) {
+function PointCard({ title, description, index }) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -374,12 +335,7 @@ function PointCard({
    SYLLABUS ACCORDION
 ========================================================= */
 
-function SyllabusAccordion({
-  module,
-  index,
-  isOpen,
-  onToggle,
-}) {
+function SyllabusAccordion({ module, index, isOpen, onToggle }) {
   const shouldReduceMotion = useReducedMotion();
 
   const topics = getArray(module?.topics);
@@ -387,21 +343,15 @@ function SyllabusAccordion({
   const title =
     typeof module === "string"
       ? module
-      : module?.title ||
-        module?.name ||
-        `Module ${index + 1}`;
+      : module?.title || module?.name || `Module ${index + 1}`;
 
   const category =
-    typeof module === "object"
-      ? module?.category || module?.unit
-      : "";
+    typeof module === "object" ? module?.category || module?.unit : "";
 
   const description =
     typeof module === "string"
       ? ""
-      : module?.description ||
-        module?.summary ||
-        "";
+      : module?.description || module?.summary || "";
 
   return (
     <motion.div
@@ -486,9 +436,7 @@ function SyllabusAccordion({
 
         <ChevronDown
           className={`flex-shrink-0 w-5 h-5 text-ink-secondary transition-transform duration-300 ${
-            isOpen
-              ? "rotate-180 text-cyan-600"
-              : ""
+            isOpen ? "rotate-180 text-cyan-600" : ""
           }`}
         />
       </button>
@@ -636,9 +584,7 @@ export default function ProgramDetails() {
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-8 h-8 text-cyan-600 animate-spin" />
 
-          <p className="text-ink-secondary font-medium">
-            Loading program...
-          </p>
+          <p className="text-ink-secondary font-medium">Loading program...</p>
         </div>
       </div>
     );
@@ -674,7 +620,8 @@ export default function ProgramDetails() {
           </h1>
 
           <p className="text-ink-secondary mb-8">
-            We couldn't load this program. It may have been moved or the link is incorrect.
+            We couldn't load this program. It may have been moved or the link is
+            incorrect.
           </p>
 
           <Link
@@ -709,34 +656,22 @@ export default function ProgramDetails() {
 
   const companies = getCompanies(program);
 
-  const structureItems = getStructureItems(
-    program.structure
-  );
+  const structureItems = getStructureItems(program.structure);
 
-  const processSteps = getProcessSteps(
-    program.process
-  );
+  const processSteps = getProcessSteps(program.process);
 
-  const outcomes = getPoints(
-    program.outcomes
-  );
+  const outcomes = getPoints(program.outcomes);
 
-  const whyPoints = getPoints(
-    getWhyBecome(program)
-  );
+  const whyPoints = getPoints(getWhyBecome(program));
 
-  const careerPoints = getPoints(
-    getCareerBenefits(program)
-  );
+  const careerPoints = getPoints(getCareerBenefits(program));
 
   const overview =
-    program.overview &&
-    typeof program.overview === "object"
+    program.overview && typeof program.overview === "object"
       ? program.overview
       : null;
 
-  const positioningLine =
-    getPositioningLine(program);
+  const positioningLine = getPositioningLine(program);
 
   /* =======================================================
      SNAPSHOT
@@ -782,7 +717,6 @@ export default function ProgramDetails() {
 
   return (
     <div className="min-h-screen bg-white">
-
       {/* =================================================
           1. HERO
       ================================================= */}
@@ -805,7 +739,6 @@ export default function ProgramDetails() {
         </div>
 
         <div className="relative container-page section-pad">
-
           <Link
             to="/"
             className="
@@ -825,21 +758,13 @@ export default function ProgramDetails() {
           </Link>
 
           <motion.div
-            initial={
-              shouldReduceMotion
-                ? false
-                : "hidden"
-            }
+            initial={shouldReduceMotion ? false : "hidden"}
             animate="visible"
             variants={stagger}
             className="max-w-3xl"
           >
-
             {program.category && (
-              <motion.div
-                variants={fadeUp}
-                className="mb-6"
-              >
+              <motion.div variants={fadeUp} className="mb-6">
                 <span
                   className="
                     inline-flex
@@ -909,16 +834,11 @@ export default function ProgramDetails() {
               >
                 <Clock className="w-4 h-4 text-cyan-400" />
 
-                <span className="text-sm font-medium">
-                  {program.duration}
-                </span>
+                <span className="text-sm font-medium">{program.duration}</span>
               </motion.div>
             )}
 
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap gap-3"
-            >
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
               <a
                 href="#syllabus"
                 className="
@@ -939,7 +859,6 @@ export default function ProgramDetails() {
                 "
               >
                 View Curriculum
-
                 <ArrowRight className="w-4 h-4" />
               </a>
 
@@ -979,7 +898,6 @@ export default function ProgramDetails() {
         <section className="border-b border-cyan-100 bg-white">
           <div className="container-page py-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-
               {snapshotStats.map((stat, index) => {
                 const Icon = stat.icon;
 
@@ -1045,7 +963,6 @@ export default function ProgramDetails() {
                   </motion.div>
                 );
               })}
-
             </div>
           </div>
         </section>
@@ -1055,51 +972,41 @@ export default function ProgramDetails() {
           3. OVERVIEW
       ================================================= */}
 
-      {overview &&
-        (overview.heading ||
-          overview.description) && (
-          <section className="section-pad bg-white">
-            <div className="container-page max-w-4xl">
+      {overview && (overview.heading || overview.description) && (
+        <section className="section-pad bg-white">
+          <div className="container-page max-w-4xl">
+            <motion.div
+              initial={shouldReduceMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{
+                once: true,
+                margin: "-60px",
+              }}
+              variants={stagger}
+            >
+              <SectionHeading
+                eyebrow="Program Overview"
+                title={overview.heading || "Overview"}
+              />
 
-              <motion.div
-                initial={
-                  shouldReduceMotion
-                    ? false
-                    : "hidden"
-                }
-                whileInView="visible"
-                viewport={{
-                  once: true,
-                  margin: "-60px",
-                }}
-                variants={stagger}
-              >
-                <SectionHeading
-                  eyebrow="Program Overview"
-                  title={
-                    overview.heading ||
-                    "Overview"
-                  }
-                />
-
-                {overview.description && (
-                  <motion.p
-                    variants={fadeUp}
-                    className="
+              {overview.description && (
+                <motion.p
+                  variants={fadeUp}
+                  className="
                       text-lg
                       text-ink-secondary
                       leading-8
                       mb-6
                     "
-                  >
-                    {overview.description}
-                  </motion.p>
-                )}
+                >
+                  {overview.description}
+                </motion.p>
+              )}
 
-                {overview.note && (
-                  <motion.div
-                    variants={fadeUp}
-                    className="
+              {overview.note && (
+                <motion.div
+                  variants={fadeUp}
+                  className="
                       flex
                       items-start
                       gap-3
@@ -1109,27 +1016,26 @@ export default function ProgramDetails() {
                       border-cyan-100
                       p-5
                     "
-                  >
-                    <Sparkles
-                      className="
+                >
+                  <Sparkles
+                    className="
                         flex-shrink-0
                         w-5
                         h-5
                         text-cyan-600
                         mt-0.5
                       "
-                    />
+                  />
 
-                    <p className="text-ink-secondary leading-7 text-[0.95rem]">
-                      {overview.note}
-                    </p>
-                  </motion.div>
-                )}
-              </motion.div>
-
-            </div>
-          </section>
-        )}
+                  <p className="text-ink-secondary leading-7 text-[0.95rem]">
+                    {overview.note}
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* =================================================
           4. WHY THIS PROGRAM
@@ -1138,23 +1044,15 @@ export default function ProgramDetails() {
       {whyPoints.length > 0 && (
         <section className="section-pad bg-surface-subtle">
           <div className="container-page">
-
             <SectionHeading
               eyebrow="Why This Program"
-              title={
-                getWhyBecome(program)?.heading ||
-                "Why This Skill"
-              }
+              title={getWhyBecome(program)?.heading || "Why This Skill"}
               align="center"
             />
 
             <motion.div
               variants={stagger}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : "hidden"
-              }
+              initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{
                 once: true,
@@ -1178,7 +1076,6 @@ export default function ProgramDetails() {
                 />
               ))}
             </motion.div>
-
           </div>
         </section>
       )}
@@ -1190,23 +1087,17 @@ export default function ProgramDetails() {
       {careerPoints.length > 0 && (
         <section className="section-pad bg-white">
           <div className="container-page">
-
             <SectionHeading
               eyebrow="Career Benefits"
               title={
-                getCareerBenefits(program)?.heading ||
-                "Where It Takes You"
+                getCareerBenefits(program)?.heading || "Where It Takes You"
               }
               align="center"
             />
 
             <motion.div
               variants={stagger}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : "hidden"
-              }
+              initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{
                 once: true,
@@ -1221,20 +1112,15 @@ export default function ProgramDetails() {
                 mx-auto
               "
             >
-              {careerPoints.map(
-                (point, index) => (
-                  <PointCard
-                    key={`career-${index}`}
-                    index={index}
-                    title={getPointTitle(point)}
-                    description={getPointDescription(
-                      point
-                    )}
-                  />
-                )
-              )}
+              {careerPoints.map((point, index) => (
+                <PointCard
+                  key={`career-${index}`}
+                  index={index}
+                  title={getPointTitle(point)}
+                  description={getPointDescription(point)}
+                />
+              ))}
             </motion.div>
-
           </div>
         </section>
       )}
@@ -1246,7 +1132,6 @@ export default function ProgramDetails() {
       {structureItems.length > 0 && (
         <section className="section-pad bg-surface-subtle">
           <div className="container-page">
-
             <SectionHeading
               eyebrow="How You'll Learn"
               title="Program Structure"
@@ -1255,11 +1140,7 @@ export default function ProgramDetails() {
 
             <motion.div
               variants={stagger}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : "hidden"
-              }
+              initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{
                 once: true,
@@ -1274,12 +1155,11 @@ export default function ProgramDetails() {
                 mx-auto
               "
             >
-              {structureItems.map(
-                (item, index) => (
-                  <motion.div
-                    key={`structure-${index}`}
-                    variants={fadeUp}
-                    className="
+              {structureItems.map((item, index) => (
+                <motion.div
+                  key={`structure-${index}`}
+                  variants={fadeUp}
+                  className="
                       rounded-2xl
                       border
                       border-cyan-100
@@ -1290,9 +1170,9 @@ export default function ProgramDetails() {
                       transition-shadow
                       duration-300
                     "
-                  >
-                    <span
-                      className="
+                >
+                  <span
+                    className="
                         flex
                         w-10
                         h-10
@@ -1305,27 +1185,20 @@ export default function ProgramDetails() {
                         font-bold
                         mb-4
                       "
-                    >
-                      {String(index + 1).padStart(
-                        2,
-                        "0"
-                      )}
-                    </span>
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
 
-                    <h3 className="font-display font-bold text-ink mb-2 leading-snug">
-                      {getStructureTitle(item)}
-                    </h3>
+                  <h3 className="font-display font-bold text-ink mb-2 leading-snug">
+                    {getStructureTitle(item)}
+                  </h3>
 
-                    <p className="text-ink-secondary text-sm leading-6">
-                      {getStructureDescription(
-                        item
-                      )}
-                    </p>
-                  </motion.div>
-                )
-              )}
+                  <p className="text-ink-secondary text-sm leading-6">
+                    {getStructureDescription(item)}
+                  </p>
+                </motion.div>
+              ))}
             </motion.div>
-
           </div>
         </section>
       )}
@@ -1335,22 +1208,14 @@ export default function ProgramDetails() {
       ================================================= */}
 
       {processSteps.length > 0 && (
-        <section
-          id="journey"
-          className="section-pad bg-white"
-        >
+        <section id="journey" className="section-pad bg-white">
           <div className="container-page max-w-4xl">
-
             <SectionHeading
               eyebrow="Learning Journey"
-              title={
-                program.process?.heading ||
-                "Your Learning Journey"
-              }
+              title={program.process?.heading || "Your Learning Journey"}
             />
 
             <div className="relative">
-
               <div
                 className="
                   absolute
@@ -1369,11 +1234,7 @@ export default function ProgramDetails() {
 
               <motion.div
                 variants={stagger}
-                initial={
-                  shouldReduceMotion
-                    ? false
-                    : "hidden"
-                }
+                initial={shouldReduceMotion ? false : "hidden"}
                 whileInView="visible"
                 viewport={{
                   once: true,
@@ -1381,20 +1242,19 @@ export default function ProgramDetails() {
                 }}
                 className="space-y-6"
               >
-                {processSteps.map(
-                  (step, index) => (
-                    <motion.div
-                      key={`step-${index}`}
-                      variants={fadeUp}
-                      className="
+                {processSteps.map((step, index) => (
+                  <motion.div
+                    key={`step-${index}`}
+                    variants={fadeUp}
+                    className="
                         relative
                         flex
                         gap-5
                         items-start
                       "
-                    >
-                      <span
-                        className="
+                  >
+                    <span
+                      className="
                           flex-shrink-0
                           z-10
                           w-10
@@ -1412,12 +1272,12 @@ export default function ProgramDetails() {
                           text-sm
                           shadow-soft
                         "
-                      >
-                        {index + 1}
-                      </span>
+                    >
+                      {index + 1}
+                    </span>
 
-                      <div
-                        className="
+                    <div
+                      className="
                           flex-1
                           rounded-2xl
                           border
@@ -1427,22 +1287,18 @@ export default function ProgramDetails() {
                           md:p-6
                           shadow-soft
                         "
-                      >
-                        <h3 className="font-display font-bold text-ink text-lg mb-1.5 leading-snug">
-                          {getStepTitle(step)}
-                        </h3>
+                    >
+                      <h3 className="font-display font-bold text-ink text-lg mb-1.5 leading-snug">
+                        {getStepTitle(step)}
+                      </h3>
 
-                        <p className="text-ink-secondary leading-7 text-[0.95rem]">
-                          {getStepDescription(
-                            step
-                          )}
-                        </p>
-                      </div>
-                    </motion.div>
-                  )
-                )}
+                      <p className="text-ink-secondary leading-7 text-[0.95rem]">
+                        {getStepDescription(step)}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
-
             </div>
           </div>
         </section>
@@ -1453,12 +1309,8 @@ export default function ProgramDetails() {
       ================================================= */}
 
       {syllabus.length > 0 && (
-        <section
-          id="syllabus"
-          className="section-pad bg-surface-subtle"
-        >
+        <section id="syllabus" className="section-pad bg-surface-subtle">
           <div className="container-page max-w-4xl">
-
             <SectionHeading
               eyebrow="Curriculum"
               title={`Syllabus · ${syllabus.length} Modules`}
@@ -1467,11 +1319,7 @@ export default function ProgramDetails() {
 
             <motion.div
               variants={stagger}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : "hidden"
-              }
+              initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{
                 once: true,
@@ -1479,27 +1327,18 @@ export default function ProgramDetails() {
               }}
               className="space-y-4"
             >
-              {syllabus.map(
-                (module, index) => (
-                  <SyllabusAccordion
-                    key={`module-${index}`}
-                    module={module}
-                    index={index}
-                    isOpen={
-                      openModule === index
-                    }
-                    onToggle={() =>
-                      setOpenModule(
-                        openModule === index
-                          ? null
-                          : index
-                      )
-                    }
-                  />
-                )
-              )}
+              {syllabus.map((module, index) => (
+                <SyllabusAccordion
+                  key={`module-${index}`}
+                  module={module}
+                  index={index}
+                  isOpen={openModule === index}
+                  onToggle={() =>
+                    setOpenModule(openModule === index ? null : index)
+                  }
+                />
+              ))}
             </motion.div>
-
           </div>
         </section>
       )}
@@ -1511,23 +1350,15 @@ export default function ProgramDetails() {
       {outcomes.length > 0 && (
         <section className="section-pad bg-white">
           <div className="container-page max-w-4xl">
-
             <SectionHeading
               eyebrow="What You'll Achieve"
-              title={
-                program.outcomes?.heading ||
-                "Learning Outcomes"
-              }
+              title={program.outcomes?.heading || "Learning Outcomes"}
               align="center"
             />
 
             <motion.div
               variants={stagger}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : "hidden"
-              }
+              initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{
                 once: true,
@@ -1535,12 +1366,11 @@ export default function ProgramDetails() {
               }}
               className="grid sm:grid-cols-2 gap-5"
             >
-              {outcomes.map(
-                (point, index) => (
-                  <motion.div
-                    key={`outcome-${index}`}
-                    variants={fadeUp}
-                    className="
+              {outcomes.map((point, index) => (
+                <motion.div
+                  key={`outcome-${index}`}
+                  variants={fadeUp}
+                  className="
                       flex
                       items-start
                       gap-3.5
@@ -1551,39 +1381,33 @@ export default function ProgramDetails() {
                       p-5
                       md:p-6
                     "
-                  >
-                    <CheckCircle2
-                      className="
+                >
+                  <CheckCircle2
+                    className="
                         flex-shrink-0
                         w-6
                         h-6
                         text-cyan-500
                         mt-0.5
                       "
-                    />
+                  />
 
-                    <div>
-                      {getPointTitle(point) && (
-                        <h3 className="font-display font-bold text-ink mb-1 leading-snug">
-                          {getPointTitle(point)}
-                        </h3>
-                      )}
+                  <div>
+                    {getPointTitle(point) && (
+                      <h3 className="font-display font-bold text-ink mb-1 leading-snug">
+                        {getPointTitle(point)}
+                      </h3>
+                    )}
 
-                      {getPointDescription(
-                        point
-                      ) && (
-                        <p className="text-ink-secondary text-sm leading-6">
-                          {getPointDescription(
-                            point
-                          )}
-                        </p>
-                      )}
-                    </div>
-                  </motion.div>
-                )
-              )}
+                    {getPointDescription(point) && (
+                      <p className="text-ink-secondary text-sm leading-6">
+                        {getPointDescription(point)}
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-
           </div>
         </section>
       )}
@@ -1602,7 +1426,6 @@ export default function ProgramDetails() {
           "
         >
           <div className="container-page max-w-4xl">
-
             <SectionHeading
               eyebrow="Career Ecosystem"
               title="Tools and Platforms You'll Work With"
@@ -1611,11 +1434,7 @@ export default function ProgramDetails() {
 
             <motion.div
               variants={stagger}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : "hidden"
-              }
+              initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{
                 once: true,
@@ -1628,12 +1447,11 @@ export default function ProgramDetails() {
                 gap-3
               "
             >
-              {companies.map(
-                (company, index) => (
-                  <motion.span
-                    key={`company-${index}`}
-                    variants={fadeUp}
-                    className="
+              {companies.map((company, index) => (
+                <motion.span
+                  key={`company-${index}`}
+                  variants={fadeUp}
+                  className="
                       inline-flex
                       items-center
                       gap-2
@@ -1652,15 +1470,13 @@ export default function ProgramDetails() {
                       transition-all
                       duration-300
                     "
-                  >
-                    <Building2 className="w-4 h-4 text-cyan-600" />
+                >
+                  <Building2 className="w-4 h-4 text-cyan-600" />
 
-                    {company}
-                  </motion.span>
-                )
-              )}
+                  {company}
+                </motion.span>
+              ))}
             </motion.div>
-
           </div>
         </section>
       )}
@@ -1698,7 +1514,6 @@ export default function ProgramDetails() {
         </div>
 
         <div className="relative container-page section-pad text-center">
-
           <motion.div
             initial={
               shouldReduceMotion
@@ -1721,29 +1536,23 @@ export default function ProgramDetails() {
             }}
             className="max-w-2xl mx-auto"
           >
-
             <div className="flex items-center justify-center gap-2 mb-6">
               <span className="w-4 h-[2px] bg-amber" />
 
-              <span className="eyebrow text-cyan-300">
-                Start Your Journey
-              </span>
+              <span className="eyebrow text-cyan-300">Start Your Journey</span>
             </div>
 
             <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl leading-tight mb-5">
               {positioningLine ||
-                `Build real skills in ${
-                  program.title ||
-                  "your chosen field"
-                }.`}
+                `Build real skills in ${program.title || "your chosen field"}.`}
             </h2>
 
             <p className="text-white/70 text-lg leading-7 mb-10 max-w-xl mx-auto">
-              Join SkillNex and learn by doing through real projects, mentor feedback, and a portfolio that proves your skills.
+              Join SkillNex and learn by doing through real projects, mentor
+              feedback, and a portfolio that proves your skills.
             </p>
 
             <div className="flex flex-wrap gap-3 justify-center">
-
               <a
                 href="#syllabus"
                 className="
@@ -1764,7 +1573,6 @@ export default function ProgramDetails() {
                 "
               >
                 Explore Curriculum
-
                 <ArrowUpRight className="w-4 h-4" />
               </a>
 
@@ -1788,16 +1596,12 @@ export default function ProgramDetails() {
                 "
               >
                 <ArrowLeft className="w-4 h-4" />
-
                 Other Programs
               </Link>
-
             </div>
           </motion.div>
-
         </div>
       </section>
-
     </div>
   );
 }
