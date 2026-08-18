@@ -8,9 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/*
-  Health check
-*/
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
@@ -18,9 +15,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-/*
-  Program API
-*/
 app.use("/api/programs", programRoutes);
 
 export default app;
