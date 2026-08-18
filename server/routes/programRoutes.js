@@ -1,31 +1,33 @@
 import express from "express";
-import db from "../database/database.js";
+import { getDB } from "../mongodb.js";
 
 const router = express.Router();
 
 /*
   GET ALL PROGRAMS
-  Used by the Programs carousel on the frontend.
 */
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const programs = db
-      .prepare(
-        `
-        SELECT
-          id,
-          slug,
-          category,
-          title,
-          description,
-          duration,
-          status
-        FROM programs
-        WHERE status = 'published'
-        ORDER BY id ASC
-      `,
+    const db = getDB();
+
+    const programs = await db
+      .collection("programs")
+      .find(
+        { status: "published" },
+        {
+          projection: {
+            _id: 1,
+            slug: 1,
+            category: 1,
+            title: 1,
+            description: 1,
+            duration: 1,
+            status: 1,
+          },
+        }
       )
-      .all();
+      .sort({ _id: 1 })
+      .toArray();
 
     res.json({
       success: true,
@@ -44,22 +46,17 @@ router.get("/", (req, res) => {
 
 /*
   GET ONE PROGRAM BY SLUG
-  Used by the individual program detail page.
 */
-router.get("/:slug", (req, res) => {
+router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
 
-    const program = db
-      .prepare(
-        `
-        SELECT *
-        FROM programs
-        WHERE slug = ?
-          AND status = 'published'
-      `,
-      )
-      .get(slug);
+    const db = getDB();
+
+    const program = await db.collection("programs").findOne({
+      slug,
+      status: "published",
+    });
 
     if (!program) {
       return res.status(404).json({
@@ -68,35 +65,9 @@ router.get("/:slug", (req, res) => {
       });
     }
 
-    /*
-      Convert JSON strings stored in SQLite
-      back into JavaScript objects.
-    */
-    const formattedProgram = {
-      ...program,
-
-      overview: JSON.parse(program.overview || "{}"),
-
-      whyBecome: JSON.parse(program.why_become || "{}"),
-
-      careerBenefits: JSON.parse(program.career_benefits || "{}"),
-
-      structure: JSON.parse(program.structure || "{}"),
-
-      process: JSON.parse(program.process || "{}"),
-
-      syllabus: JSON.parse(program.syllabus || "[]"),
-
-      outcomes: JSON.parse(program.outcomes || "{}"),
-
-      companies: JSON.parse(program.companies || "[]"),
-
-      positioningLine: program.positioning_line || "",
-    };
-
     res.json({
       success: true,
-      program: formattedProgram,
+      program,
     });
   } catch (error) {
     console.error("Error fetching program:", error);
