@@ -1,33 +1,23 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
 
 if (!uri) {
-  throw new Error("MONGODB_URI is not defined in .env");
+  throw new Error("MONGODB_URI is not defined");
 }
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
+const client = new MongoClient(uri);
 
 let db;
 
 export async function connectDB() {
-  if (db) {
-    return db;
-  }
+  if (db) return db;
 
   await client.connect();
 
   db = client.db("Skillnex");
 
-  await db.command({ ping: 1 });
-
-  console.log("MongoDB connected successfully");
+  console.log("Connected to MongoDB");
 
   return db;
 }

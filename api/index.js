@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import "dotenv/config";
 
 import { connectDB } from "../server/mongodb.js";
 import programRoutes from "../server/routes/programRoutes.js";
@@ -10,26 +9,38 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/*
-  Connect MongoDB
-*/
-connectDB().catch((error) => {
-  console.error("MongoDB connection failed:", error);
+app.get("/api/health", async (req, res) => {
+  try {
+    await connectDB();
+
+    res.json({
+      success: true,
+      message: "SkillNex backend is running",
+    });
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Database connection failed",
+      error: error.message,
+    });
+  }
 });
 
-/*
-  Health check
-*/
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    message: "SkillNex backend is running",
-  });
-});
+app.use("/api/programs", async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
 
-/*
-  Program API
-*/
-app.use("/api/programs", programRoutes);
+    res.status(500).json({
+      success: false,
+      message: "Database connection failed",
+      error: error.message,
+    });
+  }
+}, programRoutes);
 
-export default app;
+export default app; status

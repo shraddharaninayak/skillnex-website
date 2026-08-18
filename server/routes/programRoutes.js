@@ -12,20 +12,7 @@ router.get("/", async (req, res) => {
 
     const programs = await db
       .collection("programs")
-      .find(
-        { status: "published" },
-        {
-          projection: {
-            _id: 1,
-            slug: 1,
-            category: 1,
-            title: 1,
-            description: 1,
-            duration: 1,
-            status: 1,
-          },
-        }
-      )
+      .find({ status: "published" })
       .sort({ _id: 1 })
       .toArray();
 
@@ -40,6 +27,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch programs.",
+      error: error.message,
     });
   }
 });
@@ -49,14 +37,16 @@ router.get("/", async (req, res) => {
 */
 router.get("/:slug", async (req, res) => {
   try {
-    const { slug } = req.params;
-
     const db = getDB();
 
-    const program = await db.collection("programs").findOne({
-      slug,
-      status: "published",
-    });
+    const { slug } = req.params;
+
+    const program = await db
+      .collection("programs")
+      .findOne({
+        slug,
+        status: "published",
+      });
 
     if (!program) {
       return res.status(404).json({
@@ -75,6 +65,7 @@ router.get("/:slug", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch program.",
+      error: error.message,
     });
   }
 });
