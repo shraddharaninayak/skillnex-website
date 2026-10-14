@@ -16,6 +16,8 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
+import fallbackPrograms from "../data/program.js";
+import SocialMediaDetail from "./SocialMediaDetail";
 
 /* =========================================================
    API
@@ -29,38 +31,45 @@ async function fetchProgram(slug) {
       `${API_BASE_URL}/programs/${encodeURIComponent(slug)}`,
     );
 
-    if (!response.ok) {
-      return {
-        data: null,
-        error: `Program not found. (${response.status})`,
-      };
+    if (response.ok) {
+      const result = await response.json();
+      console.log("PROGRAM API RESPONSE:", result);
+
+      /*
+        Supports different backend response formats:
+        1. { data: {...} }
+        2. { program: {...} }
+        3. {...program data directly}
+      */
+      const programData = result?.data || result?.program || result;
+
+      if (programData && (programData.title || programData.slug)) {
+        return {
+          data: programData,
+          error: null,
+        };
+      }
     }
+  } catch (error) {
+    console.warn("API fetch failed, checking local program dataset:", error);
+  }
 
-    const result = await response.json();
+  // Graceful fallback to verified local program data
+  const localMatch = fallbackPrograms.find(
+    (p) => p.slug?.toLowerCase() === slug?.toLowerCase()
+  );
 
-    console.log("PROGRAM API RESPONSE:", result);
-
-    /*
-      Supports different backend response formats:
-
-      1. { data: {...} }
-      2. { program: {...} }
-      3. {...program data directly}
-    */
-    const programData = result?.data || result?.program || result;
-
+  if (localMatch) {
     return {
-      data: programData,
+      data: localMatch,
       error: null,
     };
-  } catch (error) {
-    console.error("Failed to fetch program:", error);
-
-    return {
-      data: null,
-      error: "Unable to connect to the SkillNex backend.",
-    };
   }
+
+  return {
+    data: null,
+    error: "Program not found.",
+  };
 }
 
 /* =========================================================
@@ -646,6 +655,14 @@ export default function ProgramDetails() {
         </div>
       </div>
     );
+  }
+
+  /* =======================================================
+     SOCIAL MEDIA MANAGEMENT — reference-inspired layout
+  ======================================================= */
+
+  if (slug === "social-media-management") {
+    return <SocialMediaDetail program={program} />;
   }
 
   /* =======================================================

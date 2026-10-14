@@ -1,4 +1,8 @@
 import { useState } from "react";
+import imgAssessment from "../assets/training-assessment.png";
+import imgMentors from "../assets/training-mentors.png";
+import imgProjects from "../assets/training-projects.png";
+import imgCareer from "../assets/training-career.png";
 
 const PILLARS = [
   {
@@ -8,7 +12,7 @@ const PILLARS = [
     description:
       "We evaluate your current skills, strengths, and gaps to understand where you are today and what you need to become career-ready.",
     link: "Explore Skill Assessment",
-    image: "/images/training-assessment.jpg",
+    image: imgAssessment,
   },
   {
     number: "02",
@@ -17,7 +21,7 @@ const PILLARS = [
     description:
       "Train in small cohorts with experienced professionals who guide you through practical learning, real-world skills, and career-focused development.",
     link: "Explore Mentor-led Learning",
-    image: "/images/training-mentors.jpg",
+    image: imgMentors,
   },
   {
     number: "03",
@@ -26,7 +30,7 @@ const PILLARS = [
     description:
       "Work on practical, portfolio-ready projects and case studies that help you apply your skills and build confidence for real opportunities.",
     link: "Explore Hands-on Projects",
-    image: "/images/training-projects.jpg",
+    image: imgProjects,
   },
   {
     number: "04",
@@ -35,7 +39,7 @@ const PILLARS = [
     description:
       "Get resume reviews, mock interviews, career guidance, and placement support to help you move confidently toward your career goals.",
     link: "Explore Career Support",
-    image: "/images/training-career.jpg",
+    image: imgCareer,
   },
 ];
 

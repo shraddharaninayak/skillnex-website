@@ -74,6 +74,41 @@ export default function Programs() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // Fetch programs from database dynamically
+  useEffect(() => {
+    let active = true;
+    fetch("/api/programs")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch programs");
+        return res.json();
+      })
+      .then((data) => {
+        if (active && Array.isArray(data) && data.length > 0) {
+          // Merge API data with FRONTEND_PROGRAMS to preserve all 8 existing programs
+          const merged = FRONTEND_PROGRAMS.map((baseProg) => {
+            const apiProg = data.find(
+              (p) => p.slug === baseProg.slug || p.title === baseProg.title
+            );
+            return apiProg ? { ...baseProg, ...apiProg } : baseProg;
+          });
+          // Also append any new programs created in the database that are not in FRONTEND_PROGRAMS
+          const additional = data.filter(
+            (p) =>
+              !FRONTEND_PROGRAMS.some(
+                (base) => base.slug === p.slug || base.title === p.title
+              )
+          );
+          setPrograms([...merged, ...additional]);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load programs dynamically:", err);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   // Next program
   const nextProgram = () => {
     if (programs.length === 0) return;
@@ -106,7 +141,7 @@ export default function Programs() {
   }, [programs.length]);
 
   return (
-    <section id="programs" className="section-pad bg-surface-subtle">
+    <section id="programs" className="section-pad bg-surface-subtle scroll-mt-24">
       <div className="container-page">
         {/* =========================
             SECTION HEADING
@@ -195,7 +230,7 @@ export default function Programs() {
 
                     return (
                       <motion.div
-                        key={program.title}
+                        key={program.slug || program.title}
                         layout
                         custom={direction}
                         /* ORIGINAL CARD ENTRY */

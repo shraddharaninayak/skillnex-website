@@ -1,30 +1,51 @@
-import { Linkedin, Twitter, Instagram, Youtube } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
 import logo from '../assets/skillnex-logo.jpeg';
 
 const FOOTER_LINKS = [
   {
     heading: 'Programs',
-    links: ['Full-Stack Development', 'Data Analytics & AI', 'Product & UX Design', 'Cloud & DevOps'],
+    links: [
+      { label: 'Social Media Management', href: '/programs/social-media-management' },
+      { label: 'Video Editing', href: '/programs/video-editing' },
+      { label: 'Graphic Designing', href: '/programs/graphic-designing' },
+      { label: 'Performance Marketing', href: '/programs/performance-marketing' },
+      { label: 'Full Stack Development', href: '/programs/full-stack-development' },
+      { label: 'Ecommerce Brand Management', href: '/programs/ecommerce-brand-management' },
+      { label: 'Full Digital Marketing', href: '/programs/full-digital-marketing' },
+      { label: 'Cyber Security', href: '/programs/cyber-security' },
+    ],
   },
   {
     heading: 'Solutions',
-    links: ['For students', 'For corporates', 'For colleges'],
+    links: [
+      { label: 'For Students', href: '/' },
+      { label: 'For Colleges', href: '/' },
+      { label: 'For Corporates', href: '/' },
+    ],
   },
   {
     heading: 'Company',
-    links: ['About us', 'Careers', 'Press', 'Contact'],
+    links: [
+      { label: 'About SkillNex', href: '/' },
+      { label: 'Contact Us', href: '/#cta' },
+    ],
   },
   {
     heading: 'Resources',
-    links: ['Student portfolio', 'Reviews', 'FAQ', 'Blog'],
+    links: [
+      { label: 'Student Portfolio', href: '/' },
+      { label: 'Reviews', href: '/#reviews' },
+      { label: 'FAQs', href: '/#faq' },
+    ],
   },
 ];
 
 const SOCIALS = [
-  { icon: Linkedin, label: 'LinkedIn' },
-  { icon: Twitter, label: 'Twitter' },
-  { icon: Instagram, label: 'Instagram' },
-  { icon: Youtube, label: 'YouTube' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/skillnex-30/posts/' },
+  { icon: Twitter, label: 'X (Twitter)', href: 'https://x.com/Skillnex30' },
+  { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/skillnex.30/' },
+  { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61579494351033' },
 ];
 
 export default function Footer() {
@@ -44,7 +65,9 @@ export default function Footer() {
                 return (
                   <a
                     key={social.label}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={social.label}
                     className="w-9 h-9 rounded-full border border-line flex items-center justify-center text-ink-secondary hover:text-cyan-600 hover:border-cyan-600 transition-colors duration-200"
                   >
@@ -63,13 +86,13 @@ export default function Footer() {
                 </h3>
                 <ul className="space-y-3">
                   {group.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
+                    <li key={link.label}>
+                      <Link
+                        to={link.href}
                         className="text-sm text-ink hover:text-cyan-600 transition-colors duration-200"
                       >
-                        {link}
-                      </a>
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>

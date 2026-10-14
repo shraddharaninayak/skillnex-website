@@ -18,23 +18,28 @@ export default function CTA() {
 
           <div className="relative max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight mb-5">
-              Your next skill is a cohort away.
+              Your career journey starts with SkillNex.
             </h2>
             <p className="text-white/70 leading-relaxed mb-10 max-w-lg mx-auto">
-              Talk to our team about which track fits your goals, or get started with a free skills
-              diagnostic — no commitment required.
+              Build in‑demand skills, work on real‑world projects, and learn from industry mentors.
+              Take the first step towards becoming career‑ready with SkillNex.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="#programs" className="btn-primary bg-cyan hover:bg-white hover:text-ink">
-                Get your skills diagnostic
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeozOvJLaLNhY2pYnIFjtsE9U3SCs3pX1im2suiDp1AFw1FPw/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary bg-cyan hover:bg-white hover:text-ink"
+              >
+                Get Started with SkillNex
                 <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
               </a>
               <a
-                href="mailto:hello@skillnex.com"
+                href="#programs"
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3.5 rounded-full border border-white/20 text-white hover:border-white/50 transition-colors duration-200"
               >
-                Talk to our team
+                Explore Our Programs
               </a>
             </div>
           </div>
