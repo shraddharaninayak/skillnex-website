@@ -1,4 +1,4 @@
-name: Deploy to Hostinger VPS
+name: Deploy SkillNex to Hostinger
 
 on:
   push:
@@ -6,33 +6,32 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to VPS via SSH
-        uses: appleboy/ssh-action@v1.2.0
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT || 22 }}
-          script: |
-            set -e
-            echo "🚀 Navigating to application directory..."
-            cd /var/www/skillnex
+          node-version: 20
+          cache: 'npm'
 
-            echo "📥 Pulling latest changes from main branch..."
-            git reset --hard
-            git pull origin main
+      - name: 📦 Install dependencies
+        run: npm ci || npm install
 
-            echo "📦 Installing dependencies..."
-            npm install
+      - name: 🛠️ Build Vite production assets
+        run: npm run build
 
-            echo "🛠️ Building Vite frontend..."
-            npm run build
-
-            echo "🔄 Restarting Express server with PM2..."
-            pm2 restart skillnex-api || pm2 start server.js --name skillnex-api
-
-            echo "✅ Deployment finished successfully!"
+      - name: 🚀 Deploy to Hostinger via Rsync / SSH
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOSTINGER_HOST }}
+          REMOTE_USER: ${{ secrets.HOSTINGER_USERNAME }}
+          REMOTE_PORT: ${{ secrets.HOSTINGER_PORT || 65002 }}
+          TARGET: "domains/skillnex30.com/public_html/"
+          SOURCE: "dist/"
+          EXCLUDE: "/.git/, /.github/"
